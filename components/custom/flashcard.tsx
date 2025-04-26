@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Flashcard as FlashcardType } from "@/data/types"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Toggle } from "@/components/ui/toggle"
@@ -17,6 +17,11 @@ export function Flashcard({ card, onMastered, isMastered = false }: Readonly<Fla
   const [flipped, setFlipped] = useState(false)
   const [mastered, setMastered] = useState(isMastered)
 
+  // Update mastered state when isMastered prop changes
+  useEffect(() => {
+    setMastered(isMastered)
+  }, [isMastered])
+
   const handleFlip = () => {
     setFlipped(!flipped)
   }
@@ -31,17 +36,15 @@ export function Flashcard({ card, onMastered, isMastered = false }: Readonly<Fla
 
   return (
     <Card
-      className={cn(
-        "w-full max-w-md mx-auto h-[400px] perspective-1000 cursor-pointer transition-all duration-500",
-        flipped && "rotate-y-180"
-      )}
+      className="w-full max-w-md mx-auto h-[400px] perspective-1000 cursor-pointer"
       onClick={handleFlip}
     >
-      <div className="relative w-full h-full preserve-3d">
-        <CardContent className={cn(
-          "absolute w-full h-full backface-hidden p-6 flex flex-col",
-          !flipped ? "visible" : "invisible rotate-y-180"
-        )}>
+      <div className={cn(
+        "relative w-full h-full preserve-3d transition-transform duration-500",
+        flipped && "rotate-y-180"
+      )}>
+        {/* Front of card */}
+        <CardContent className="absolute w-full h-full backface-hidden p-6 flex flex-col">
           <div className="flex justify-between items-start mb-4">
             <div className="px-2 py-1 text-xs rounded-md bg-muted">
               {card.subcategory}
@@ -63,10 +66,8 @@ export function Flashcard({ card, onMastered, isMastered = false }: Readonly<Fla
           </div>
         </CardContent>
 
-        <CardContent className={cn(
-          "absolute w-full h-full backface-hidden p-6 flex flex-col rotate-y-180",
-          flipped ? "visible" : "invisible"
-        )}>
+        {/* Back of card */}
+        <CardContent className="absolute w-full h-full backface-hidden p-6 flex flex-col rotate-y-180">
           <div className="flex-1 overflow-auto">
             <p className="mb-4">{card.back}</p>
             {card.code && (

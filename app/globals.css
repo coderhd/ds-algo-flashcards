@@ -137,3 +137,8 @@
 .rotate-y-180 {
   transform: rotateY(180deg);
 }
+
+/* Additional styles to ensure proper 3D flip */
+.transition-transform {
+  transition: transform 0.6s;
+}
