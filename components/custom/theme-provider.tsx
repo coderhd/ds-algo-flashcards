@@ -29,9 +29,7 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = "dsa-flashcards-theme",
-  attribute = "data-theme",
   enableSystem = true,
-  disableTransitionOnChange = false,
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(

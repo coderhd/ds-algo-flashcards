@@ -75,7 +75,7 @@ export function Search() {
 
       {results.length === 0 && searchTerm && (
         <div className="text-center py-12">
-          <p className="text-muted-foreground">No flashcards found for "{searchTerm}"</p>
+          <p className="text-muted-foreground">No flashcards found for &ldquo;{searchTerm}&rdquo;</p>
         </div>
       )}
     </div>

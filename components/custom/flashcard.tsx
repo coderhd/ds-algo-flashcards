@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { Flashcard as FlashcardType } from "@/data/types"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
 import { Toggle } from "@/components/ui/toggle"
 import { Star } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -14,7 +13,7 @@ interface FlashcardProps {
   isMastered?: boolean
 }
 
-export function Flashcard({ card, onMastered, isMastered = false }: FlashcardProps) {
+export function Flashcard({ card, onMastered, isMastered = false }: Readonly<FlashcardProps>) {
   const [flipped, setFlipped] = useState(false)
   const [mastered, setMastered] = useState(isMastered)
 
@@ -31,7 +30,7 @@ export function Flashcard({ card, onMastered, isMastered = false }: FlashcardPro
   }
 
   return (
-    <Card 
+    <Card
       className={cn(
         "w-full max-w-md mx-auto h-[400px] perspective-1000 cursor-pointer transition-all duration-500",
         flipped && "rotate-y-180"
@@ -50,8 +49,8 @@ export function Flashcard({ card, onMastered, isMastered = false }: FlashcardPro
             <div className={cn(
               "px-2 py-1 text-xs rounded-md",
               card.difficulty === "easy" ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" :
-              card.difficulty === "medium" ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200" :
-              "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
+                card.difficulty === "medium" ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200" :
+                  "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200"
             )}>
               {card.difficulty}
             </div>
@@ -90,8 +89,8 @@ export function Flashcard({ card, onMastered, isMastered = false }: FlashcardPro
             </span>
           ))}
         </div>
-        <Toggle 
-          pressed={mastered} 
+        <Toggle
+          pressed={mastered}
           onPressedChange={handleMastered}
           aria-label="Toggle mastered"
           size="sm"
