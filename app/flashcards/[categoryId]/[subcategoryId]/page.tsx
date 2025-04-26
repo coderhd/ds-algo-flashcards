@@ -4,10 +4,10 @@ import { flashcards } from "@/data/flashcards"
 import { FlashcardContent } from "@/components/custom/flashcard-content"
 
 interface FlashcardsPageProps {
-  params: {
+  params: Promise<{
     categoryId: string
     subcategoryId: string
-  }
+  }>
 }
 
 export default async function FlashcardsPage({ params }: FlashcardsPageProps) {

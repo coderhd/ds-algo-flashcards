@@ -2,10 +2,11 @@ import { notFound } from "next/navigation";
 import { categories } from "@/data/categories";
 import { CategoryContent } from "@/components/custom/category-content";
 
+// In Next.js 15, params is a Promise that resolves to an object
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     categoryId: string;
-  };
+  }>;
 }
 
 export function generateStaticParams() {
